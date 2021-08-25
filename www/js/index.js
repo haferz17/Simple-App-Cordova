@@ -24,6 +24,61 @@ document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
 
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    document.getElementById('deviceready').classList.add('ready');
+    // console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
+    // document.getElementById('deviceready').classList.add('ready');
+
+    // Leaflet
+    document.getElementById('buttonWatch').style.visibility = "visible"
+    document.getElementById('buttonStopWatch').style.visibility = "hidden"
+    var map = L.map('mapLeaflet', { zoomControl: false }).setView([-6.200000, 106.816666], 10);
+    var wp = null
+    var marker = null
+
+    L.control.zoom({ position: 'topright' }).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    marker = L.marker([-6.200000, 106.816666]).addTo(map)
+        .bindPopup('Hi Aftar')
+        .openPopup();
+
+    document.getElementById('buttonLoc').addEventListener('click', () => {
+        if (marker) map.removeLayer(marker)
+        navigator.geolocation.getCurrentPosition(position => {
+            Latitude = position.coords.latitude;
+            Longitude = position.coords.longitude;
+            marker = L.marker([Latitude, Longitude]).addTo(map)
+                .bindPopup('You are here now')
+                .openPopup();
+            map.setView([Latitude, Longitude], 15)
+        }, error => {
+            console.log('code: ', error)
+        }, {
+            enableHighAccuracy: true
+        });
+    })
+
+    document.getElementById('buttonWatch').addEventListener('click', () => {
+        document.getElementById('buttonWatch').style.visibility = "hidden"
+        document.getElementById('buttonStopWatch').style.visibility = "visible"
+        if (marker) map.removeLayer(marker)
+        wp = navigator.geolocation.watchPosition(position => {
+            Latitude = position.coords.latitude;
+            Longitude = position.coords.longitude;
+            if (marker) map.removeLayer(marker)
+            marker = L.marker([Latitude, Longitude]).addTo(map);
+            map.setView([Latitude, Longitude], 15)
+        }, error => {
+            console.log('code: ', error)
+        }, {
+            enableHighAccuracy: true
+        });
+    })
+
+    document.getElementById('buttonStopWatch').addEventListener('click', () => {
+        document.getElementById('buttonWatch').style.visibility = "visible"
+        document.getElementById('buttonStopWatch').style.visibility = "hidden"
+        navigator.geolocation.clearWatch(wp)
+    })
 }
