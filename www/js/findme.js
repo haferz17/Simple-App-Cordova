@@ -33,7 +33,6 @@ function onDeviceReady() {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
-
     marker = L.marker([-6.200000, 106.816666]).addTo(map)
         .bindPopup('Hi Aftar')
         .openPopup();
