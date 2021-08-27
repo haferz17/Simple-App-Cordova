@@ -28,6 +28,7 @@ function onDeviceReady() {
     var map = L.map('mapLeaflet', { zoomControl: false }).setView([-6.200000, 106.816666], 10);
     var wp = null
     var marker = null
+    var Latitude, Longitude
 
     L.control.zoom({ position: 'topright' }).addTo(map);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -62,7 +63,7 @@ function onDeviceReady() {
             Longitude = position.coords.longitude;
             if (marker) map.removeLayer(marker)
             marker = L.marker([Latitude, Longitude]).addTo(map);
-            map.setView([Latitude, Longitude], 15)
+            map.setView([Latitude, Longitude], 13)
         }, error => {
             console.log('code: ', error)
         }, {
