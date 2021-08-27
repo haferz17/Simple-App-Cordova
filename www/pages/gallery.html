@@ -17,7 +17,7 @@
 
 <body>
     <div class="bg-white min-h-screen text-black relative overflow-y-auto scrollbar-hidden">
-        <div class="fixed top-0 left-0 pl-5 py-4 bg-white w-full flex align-center">
+        <div class="fixed top-0 left-0 pl-5 py-4 bg-white w-full flex items-center">
             <a href="../index.html">
                 <i class="bi-chevron-left text-black self-center text-xl"></i>
             </a>
@@ -26,8 +26,8 @@
             <p class="text-3xl mt-5">My Gallery</p>
             <p class="text-base text-gray-400">11 photos</p>
             <div class="gallery grid-cols-8 grid-rows-2 mt-5">
-                <button id="buttonCamera" class="gallery__item--1 bg-gray-100 rounded-md">
-                    <div id="placeholder" class="flex flex-col align-center justify-center">
+                <button class="gallery__item--1 bg-gray-100 rounded-md">
+                    <div id="placeholder" class="flex flex-col items-center justify-center">
                         <i class="bi-camera text-gray-400 self-center text-4xl shadow-sm" id="placeholder2"></i>
                         <p class="text-sm text-gray-400 mt-1 self-center">New photo</p>
                     </div>
@@ -67,6 +67,10 @@
                     <img src="../img/foto-ancol.jpeg" class="gallery__img" />
                 </div>
             </div>
+        </div>
+        <div class="fixed bottom-0 right-0 flex flex-col pr-5 pb-5">
+            <button id="buttonCamera" class="shadow-md rounded-full px-4 py-3" style="background-color: #FFF2D0;"><i
+                    class="bi-camera text-2xl "></i></button>
         </div>
     </div>
     <script src="../cordova.js"></script>

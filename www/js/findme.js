@@ -34,7 +34,7 @@ function onDeviceReady() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
     marker = L.marker([-6.200000, 106.816666]).addTo(map)
-        .bindPopup('Hi Aftar')
+        .bindPopup('Hi James')
         .openPopup();
 
     document.getElementById('buttonLoc').addEventListener('click', () => {

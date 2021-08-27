@@ -23,8 +23,19 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
     const getActivePage = (item) => window.location.pathname == item
-    if (getActivePage('/index.html') || getActivePage('/android_asset/www/index.html')) {
-        document.getElementById('home').classList.remove("bi-house-door")
-        document.getElementById('home').classList.add("bi-house-door-fill", "text-blue-400")
+    if (getActivePage('/pages/profile.html') || getActivePage('/android_asset/www/pages/profile.html')) {
+        document.getElementById('person').classList.remove("bi-person")
+        document.getElementById('person').classList.add("bi-person-fill", "text-blue-400")
     }
+    document.getElementById('buttonCamera').addEventListener('click', () => {
+        navigator.camera.getPicture((s) => {
+            document.getElementById('result').setAttribute('src', 'data:image/png;base64, ' + s)
+        }, (e) => {
+        }, {
+            quality: 60,
+            cameraDirection: 1,
+            destinationType: 0,
+            correctOrientation: true
+        })
+    })
 }
